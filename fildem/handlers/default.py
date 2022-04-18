@@ -322,20 +322,20 @@ class CommandWindow(Gtk.ApplicationWindow):
 			scrollbar { opacity: 0; }
 
 			window decoration { box-shadow: none; border-color: @borders;
-				border-style: solid; border-width: 1px; border-radius: 0; }
+				border-style: solid; border-width: 1px; border-radius: 12px; }
 		"""
 
 		inject_custom_style(self, styles)
 
 	def grab_keyboard(self, window, status, tstamp):
 		while Gdk.keyboard_grab(window, True, tstamp) != status:
-			time.sleep(0.1)
+			time.sleep(0.0)
 
 	def grab_pointer(self, window, status, tstamp):
 		mask = Gdk.EventMask.BUTTON_PRESS_MASK
 
 		while Gdk.pointer_grab(window, True, mask, window, None, tstamp) != status:
-			time.sleep(0.1)
+			time.sleep(0.0)
 
 	def emulate_focus_out_event(self):
 		if not self.wayland:

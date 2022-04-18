@@ -157,9 +157,9 @@ class CommandWindow(Gtk.ApplicationWindow):
 		self.my_menu_bar.select_item(menu) # activate_item(menu)
 
 	def open_menu_by_name(self, name):
-		name = name.replace('_', '')
+		name = name.replace('_', '').replace(' ', '')
 		for menu in self.my_menu_bar.get_children():
-			if menu.get_label().replace('_', '') == name:
+			if menu.get_label().replace('_', '').replace(' ', '') == name:
 				self.open_menu_shortcut(menu)
 				break
 
@@ -174,10 +174,14 @@ class CommandWindow(Gtk.ApplicationWindow):
 	def set_tree_menu(self, tree):
 		self.destroy_menus()
 		children = tree.children(tree[tree.root].identifier)
+		max_width = 0
+		for c in children:
+			max_width = max(max_width, int(len(c.tag) * 1.2))
+
 		for c in children:
 			menu = Menu(tree, c, self.accel_group)
 			button = Gtk.MenuItem()
-			button.set_label(c.tag)
+			button.set_label(c.tag.center( len(c.tag) + 4 ))
 			button.set_use_underline(True)
 			button.set_submenu(menu) # set_popup(menu)
 			button.show_all()
@@ -214,7 +218,7 @@ class CommandWindow(Gtk.ApplicationWindow):
 			menubar > menuitem { min-height: 1em; }
 
 			window decoration { box-shadow: none; border-color: @borders;
-				border-style: solid; border-width: 1px; border-radius: 0; }
+				border-style: solid; border-width: 1px; border-radius: 12px; }
 		"""
 
 		inject_custom_style(self, styles)
