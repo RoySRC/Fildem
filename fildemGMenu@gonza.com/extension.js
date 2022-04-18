@@ -129,12 +129,12 @@ const WindowActions = class WindowActions {
 				win.maximize(Meta.MaximizeFlags.BOTH);
 				break;
 			case 'Move':
-				GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+				GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => {
 					WindowMenu.WindowMenu.prototype._grabAction(win, Meta.GrabOp.KEYBOARD_MOVING, global.display.get_current_time_roundtrip());
 				});
 				break;
 			case 'Resize':
-				GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+				GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => {
 					WindowMenu.WindowMenu.prototype._grabAction(win, Meta.GrabOp.KEYBOARD_RESIZING_UNKNOWN, global.display.get_current_time_roundtrip());
 				});
 				break;

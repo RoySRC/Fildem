@@ -22,7 +22,7 @@ def normalize_markup(text):
 
 
 def run_generator(function):
-	priority  = GLib.PRIORITY_LOW
+	priority  = GLib.PRIORITY_HIGH
 	generator = function()
 
 	GLib.idle_add(lambda: next(generator, False), priority=priority)
@@ -135,13 +135,13 @@ class CommandList(Gtk.ListBox):
 		self.visible_rows = []
 		self.filter_value = normalize_string(value)
 
-		GLib.idle_add(self.invalidate_filter_value, priority=GLib.PRIORITY_LOW)
+		GLib.idle_add(self.invalidate_filter_value, priority=GLib.PRIORITY_HIGH)
 
 	def invalidate_filter_value(self):
 		self.invalidate_filter()
 
 		GLib.idle_add(self.invalidate_sort, priority=GLib.PRIORITY_HIGH)
-		GLib.idle_add(self.invalidate_selection, priority=GLib.PRIORITY_LOW)
+		GLib.idle_add(self.invalidate_selection, priority=GLib.PRIORITY_HIGH)
 
 	def invalidate_selection(self):
 		if bool(self.filter_value):

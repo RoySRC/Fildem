@@ -174,10 +174,6 @@ class CommandWindow(Gtk.ApplicationWindow):
 	def set_tree_menu(self, tree):
 		self.destroy_menus()
 		children = tree.children(tree[tree.root].identifier)
-		max_width = 0
-		for c in children:
-			max_width = max(max_width, int(len(c.tag) * 1.2))
-
 		for c in children:
 			menu = Menu(tree, c, self.accel_group)
 			button = Gtk.MenuItem()
