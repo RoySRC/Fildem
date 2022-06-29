@@ -177,7 +177,7 @@ class CommandWindow(Gtk.ApplicationWindow):
 		for c in children:
 			menu = Menu(tree, c, self.accel_group)
 			button = Gtk.MenuItem()
-			button.set_label(c.tag.center( len(c.tag) + 4 ))
+			button.set_label(c.tag.center( len(c.tag) + 1 ))
 			button.set_use_underline(True)
 			button.set_submenu(menu) # set_popup(menu)
 			button.show_all()
